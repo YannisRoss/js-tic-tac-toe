@@ -1,0 +1,28 @@
+body {
+    background-color: gray;
+    box-sizing: border-box;
+    display: flex;
+
+}
+
+.grid-container{
+    flex-wrap: wrap;
+    margin-left: 20%;
+    margin-right: 20%;
+    padding: 10%;
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+    align-content: center;
+    
+}
+
+
+.grid-button {
+    width: 25vh;
+    height: 25vh;
+    border: 1px solid rgb(218, 144, 32);
+    background-image: linear-gradient(to right, rgb(0, 140, 255), cyan);
+    border-radius: 25%;
+}
+
