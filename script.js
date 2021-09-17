@@ -7,29 +7,40 @@ function Player(name, symbol, wins) {
 }
 
 
-function gameFunction() {
+function checkGameStatus() {
 
-        
-    this.gridArray = [null,null,null,
-                null,null,null,
-                null,null,null]
 
-  
+    arr = []
 
+    i = 0
+    while (i <9){
+        arr[i] = document.getElementById(`button-${i+1}`).innerHTML
+        i++
+    }
+
+
+    const isEmpty = (element) => element == '';
+    const allEqual = arr => arr.every( element => element === arr[0] )
+        if ((arr.some(isEmpty)) == false) {
+        console.log("game over")
+    }
+        else if (allEqual([arr[0],arr[1],arr[2]])) {
+            console.log("win")
+
+        }
 }
 
 let player1 = new Player((prompt("What's your name, player 1?")), 'X', 0)
 let player2 = new Player((prompt("And your name, player 2?")), 'O', 0)
 
-game = new gameFunction
 
 let turnCounter = 0
 let currentPlayer = player1
-console.log(`first plays ${player1.name}, who is the ${player1.symbol}`)
+console.log(`first plays ${player1.playerName}, who is the ${player1.symbol}`)
 
-function newRound(turn, game) {
+function newRound(turn) {
     console.log(0)
-    console.log(game)
+ 
 
     if (turn%2 == 0) {
         console.log(1)
@@ -49,17 +60,17 @@ function newRound(turn, game) {
 
 }
 
-newRound(turnCounter, gameFunction)
+newRound(turnCounter)
 let buttons = document.getElementsByClassName("grid-buttons")
 
 
 
 function clickButton(player, button) {
     
-    console.log(`clicked by ${player.name}`)
+    console.log(`${button.id} clicked by ${player.playerName}`)
     
     button.innerHTML = player.symbol;
-    newRound(turnCounter, game)
+    newRound(turnCounter)
 
 }
 
