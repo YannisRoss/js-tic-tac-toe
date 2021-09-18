@@ -20,13 +20,34 @@ function checkGameStatus() {
 
 
     const isEmpty = (element) => element == '';
-    const allEqual = arr => arr.every( element => element === arr[0] )
+    const allEqual = arr => arr.every( element => element === arr[0] && element !== '')
         if ((arr.some(isEmpty)) == false) {
         console.log("game over")
     }
         else if (allEqual([arr[0],arr[1],arr[2]])) {
-            console.log("win")
-
+            console.log("wintop")
+        }
+        else if(allEqual([arr[3],arr[4],arr[5]])){
+            console.log('winmid')
+        }
+        else if(allEqual([arr[6],arr[7],arr[8]])){
+            console.log('winbot')
+        }
+        else if(allEqual([arr[0],arr[3],arr[6]])) {
+            console.log('winL')
+        }
+        
+        else if(allEqual([arr[1],arr[4],arr[7]])) {
+            console.log('winmidVert')
+        }
+        else if(allEqual([arr[2],arr[5],arr[8]])) {
+            console.log('winR')
+        }
+        else if(allEqual([arr[0],arr[4],arr[8]])) {
+            console.log('winFirstDiag')
+        }
+        else if(allEqual([arr[2],arr[4],arr[6]])) {
+            console.log('win2ndDiag')
         }
 }
 
@@ -39,18 +60,15 @@ let currentPlayer = player1
 console.log(`first plays ${player1.playerName}, who is the ${player1.symbol}`)
 
 function newRound(turn) {
-    console.log(0)
  
 
     if (turn%2 == 0) {
-        console.log(1)
 
         currentPlayer = player1
         console.log(`currentPlayer is ${currentPlayer.playerName}, should be ${player1.playerName}`)
     }
     else {
         currentPlayer = player2
-        console.log(2)
         console.log(`currentPlayer is ${currentPlayer.playerName}, should be ${player2.playerName}`)
 
     }
@@ -71,7 +89,8 @@ function clickButton(player, button) {
     
     button.innerHTML = player.symbol;
     newRound(turnCounter)
-
+    button.removeEventListener('click', function() { clickButton(currentPlayer,button) })
+    checkGameStatus()
 }
 
 
@@ -94,9 +113,8 @@ let i = 1
 
         });
 
-        button.addEventListener('click', e => {
-            clickButton(currentPlayer,button)
-        }
+        button.addEventListener('click', function() {clickButton(currentPlayer,button)}
+
         );
         i++;
 
