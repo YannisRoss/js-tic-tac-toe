@@ -65,6 +65,20 @@ function checkGameStatus() {
         }
           
         if (gameOver && stalemate == false){
+            currentPlayer.wins++
+            i = 0
+            while (i < buttons.length){
+
+                let disabledButton = buttons[i].cloneNode(true);
+                buttons[i].replaceWith(disabledButton)
+                i++
+            }
+
+            console.log('win logged')
+            winAnnouncerDiv = document.getElementById("winner-announcer")
+                winAnnouncerDiv.innerHTML = `${currentPlayer.playerName} won!`
+                currentPlayerDiv.innerHTML = ''
+                winTrackerDiv.innerHTML = `${player1.playerName}: ${player1.wins}` + '\n' + `${player2.playerName}: ${player2.wins}` 
 
         }
         
@@ -80,6 +94,8 @@ console.log(`first plays ${player1.playerName}, who is the ${player1.symbol}`)
 let currentPlayerDiv = document.getElementById('player-announcer')
 let winTrackerDiv = document.getElementById('win-tracker')
     winTrackerDiv.innerHTML = `${player1.playerName}: ${player1.wins}` + '\n' + `${player2.playerName}: ${player2.wins}` 
+
+let buttons = document.getElementsByClassName("grid-buttons")
 
 
 function newRound(turn) {
@@ -103,7 +119,6 @@ function newRound(turn) {
 }
 
 newRound(turnCounter)
-let buttons = document.getElementsByClassName("grid-buttons")
 
 
 
