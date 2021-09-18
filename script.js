@@ -26,6 +26,7 @@ function checkGameStatus() {
     }
         else if (allEqual([arr[0],arr[1],arr[2]])) {
             console.log("wintop")
+            currentPlayer.wins++
         }
         else if(allEqual([arr[3],arr[4],arr[5]])){
             console.log('winmid')
@@ -59,7 +60,8 @@ let turnCounter = 0
 let currentPlayer = player1
 console.log(`first plays ${player1.playerName}, who is the ${player1.symbol}`)
 let currentPlayerDiv = document.getElementById('player-announcer')
-
+let winTrackerDiv = document.getElementById('win-tracker')
+    winTrackerDiv.innerHTML = `${player1.playerName}: ${player1.wins}` + '\n' + `${player2.playerName}: ${player2.wins}` 
 function newRound(turn) {
  
 
@@ -91,7 +93,9 @@ function clickButton(player, button) {
     
     button.innerHTML = player.symbol;
     newRound(turnCounter)
-    button.removeEventListener('click', function() { clickButton(currentPlayer,button) })
+       //button.removeEventListener('click', function(){clickButton(currentPlayer,button)})
+    let disabledButton = button.cloneNode(true);
+    button.replaceWith(disabledButton)
     checkGameStatus()
 }
 
@@ -115,7 +119,7 @@ let i = 1
 
         });
 
-        button.addEventListener('click', function() {clickButton(currentPlayer,button)}
+        button.addEventListener('click', function(){clickButton(currentPlayer,button)}
 
         );
         i++;
