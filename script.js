@@ -21,10 +21,7 @@ function checkGameStatus() {
 
     const isEmpty = (element) => element == '';
     const allEqual = arr => arr.every( element => element === arr[0] && element !== '')
-        if ((arr.some(isEmpty)) == false) {
-        console.log("game over")
-    }
-        else if (allEqual([arr[0],arr[1],arr[2]])) {
+     if (allEqual([arr[0],arr[1],arr[2]])) {
             console.log("wintop")
             currentPlayer.wins++
         }
@@ -50,6 +47,10 @@ function checkGameStatus() {
         else if(allEqual([arr[2],arr[4],arr[6]])) {
             console.log('win2ndDiag')
         }
+        else if ((arr.some(isEmpty)) == false) {
+            console.log("game over")
+        }
+           
 }
 
 let player1 = new Player((prompt("What's your name, player 1?")), 'X', 0)
