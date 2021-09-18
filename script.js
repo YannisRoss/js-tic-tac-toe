@@ -58,6 +58,7 @@ let player2 = new Player((prompt("And your name, player 2?")), 'O', 0)
 let turnCounter = 0
 let currentPlayer = player1
 console.log(`first plays ${player1.playerName}, who is the ${player1.symbol}`)
+let currentPlayerDiv = document.getElementById('player-announcer')
 
 function newRound(turn) {
  
@@ -75,6 +76,7 @@ function newRound(turn) {
 
     turnCounter++
     console.log(turnCounter)
+    currentPlayerDiv.innerHTML = currentPlayer.playerName
 
 }
 
@@ -119,8 +121,6 @@ let i = 1
         i++;
 
     }
-
-let currentPlayerDiv = document.getElementById('player-announcer')
 
 
 

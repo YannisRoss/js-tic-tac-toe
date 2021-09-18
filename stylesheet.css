@@ -21,22 +21,24 @@ body {
 
 }
 .grid-container{
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+
     margin-right: 20%;
     padding: 8%;
     padding-bottom: 0;
     height: 80vh;
-    justify-content: center;
-    align-content: center;
+  
     
 }
 
 
 .grid-buttons {
-    font-size: 50px;
+    font-size: 70px;
     width: 25vh;
     height: 25vh;
-    margin: 1%;
+    margin: 3%;
     border: 1px solid rgb(218, 144, 32);
     background-image: linear-gradient(to right, rgb(0, 140, 255), rgb(0, 255, 255));
     border-radius: 25%;
