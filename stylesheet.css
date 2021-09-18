@@ -17,12 +17,13 @@ body {
     padding: 3%;
     padding-bottom: 0;
     border: 2px double goldenrod;
-    font-family: fantasy;
-
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    /*font-family: fantasy; */
+    text-align: center;
 }
 #panel-header {
 
-    font-size: 100%;
+    font-size: 45px;
 }
 #win-tracker {
 
@@ -30,6 +31,8 @@ body {
 }
 #player-announcer{
     font-size: 50px;
+    color: lightcyan;
+    margin-top: 19%;
 }
 
 #winner-announcer{
@@ -37,9 +40,14 @@ body {
 }
 
 #new-game-button {
-
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+    background-color: gray;
     width: 50%;
     height: 20%;
+    margin-top: 40%;
+    bottom: 0;
 }
 .grid-container{
     display: grid;
