@@ -2,14 +2,12 @@ function Player(name, symbol, wins) {
     this.playerName = name;
     this.wins = wins
     this.symbol = symbol
-
-   
+  
 }
 
-
 function checkGameStatus() {
-
-
+    let gameOver = false
+    let stalemate = false
     arr = []
 
     i = 0
@@ -18,39 +16,58 @@ function checkGameStatus() {
         i++
     }
 
-
     const isEmpty = (element) => element == '';
     const allEqual = arr => arr.every( element => element === arr[0] && element !== '')
      if (allEqual([arr[0],arr[1],arr[2]])) {
             console.log("wintop")
-            currentPlayer.wins++
+            gameOver = true
         }
         else if(allEqual([arr[3],arr[4],arr[5]])){
             console.log('winmid')
+            gameOver = true
+
         }
         else if(allEqual([arr[6],arr[7],arr[8]])){
             console.log('winbot')
+            gameOver = true
+
         }
         else if(allEqual([arr[0],arr[3],arr[6]])) {
-            console.log('winL')
+            console.log('winL')            
+            gameOver = true
+
         }
         
         else if(allEqual([arr[1],arr[4],arr[7]])) {
             console.log('winmidVert')
+            gameOver = true
+
         }
         else if(allEqual([arr[2],arr[5],arr[8]])) {
             console.log('winR')
+            gameOver = true
+
         }
         else if(allEqual([arr[0],arr[4],arr[8]])) {
             console.log('winFirstDiag')
+            gameOver = true
+
         }
         else if(allEqual([arr[2],arr[4],arr[6]])) {
             console.log('win2ndDiag')
+            gameOver = true
+
         }
         else if ((arr.some(isEmpty)) == false) {
             console.log("game over")
+            gameOver = true
+            stalemate = true
         }
-           
+          
+        if (gameOver && stalemate == false){
+
+        }
+        
 }
 
 let player1 = new Player((prompt("What's your name, player 1?")), 'X', 0)
@@ -63,6 +80,8 @@ console.log(`first plays ${player1.playerName}, who is the ${player1.symbol}`)
 let currentPlayerDiv = document.getElementById('player-announcer')
 let winTrackerDiv = document.getElementById('win-tracker')
     winTrackerDiv.innerHTML = `${player1.playerName}: ${player1.wins}` + '\n' + `${player2.playerName}: ${player2.wins}` 
+
+
 function newRound(turn) {
  
 
@@ -79,7 +98,7 @@ function newRound(turn) {
 
     turnCounter++
     console.log(turnCounter)
-    currentPlayerDiv.innerHTML = currentPlayer.playerName
+    currentPlayerDiv.innerHTML = `${currentPlayer.playerName}'s turn!`
 
 }
 
@@ -104,12 +123,10 @@ function clickButton(player, button) {
 
 let i = 1
     while (i <= buttons.length)  {
-        //console.log(`button-${i}`)
         
         let button = document.getElementById(`button-${i}`)
         button.addEventListener('mouseenter', e => {
             button.style.backgroundImage = 'linear-gradient(to right, rgb(0, 140, 150), rgb(0, 255, 155))';
-           // console.log("over")
             
         });
         
@@ -128,14 +145,6 @@ let i = 1
     }
 
 
-
-    /*  
-
-
-        player object
-            wins
-
-    */
 
 
 

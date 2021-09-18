@@ -20,9 +20,12 @@ body {
 
 
 }
+#win-tracker {
 
+    font-size: 30px;
+}
 #player-announcer{
-    font-size: 20px;
+    font-size: 50px;
 }
 .grid-container{
     display: grid;
