@@ -17,8 +17,12 @@ body {
     padding: 3%;
     padding-bottom: 0;
     border: 2px double goldenrod;
+    font-family: fantasy;
 
+}
+#panel-header {
 
+    font-size: 100%;
 }
 #win-tracker {
 
@@ -30,6 +34,12 @@ body {
 
 #winner-announcer{
     font-size: 60px;
+}
+
+#new-game-button {
+
+    width: 50%;
+    height: 20%;
 }
 .grid-container{
     display: grid;

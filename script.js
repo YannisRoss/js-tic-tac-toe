@@ -4,10 +4,11 @@ function Player(name, symbol, wins) {
     this.symbol = symbol
   
 }
+let gameOver = false
+let stalemate = false
 
 function checkGameStatus() {
-    let gameOver = false
-    let stalemate = false
+
     arr = []
 
     i = 0
@@ -18,6 +19,8 @@ function checkGameStatus() {
 
     const isEmpty = (element) => element == '';
     const allEqual = arr => arr.every( element => element === arr[0] && element !== '')
+    winAnnouncerDiv = document.getElementById("winner-announcer")
+
      if (allEqual([arr[0],arr[1],arr[2]])) {
             console.log("wintop")
             gameOver = true
@@ -72,8 +75,7 @@ function checkGameStatus() {
                 let disabledButton = buttons[i].cloneNode(true);
                 buttons[i].replaceWith(disabledButton)
                 i++
-            }
-
+            } 
             console.log('win logged')
             winAnnouncerDiv = document.getElementById("winner-announcer")
                 winAnnouncerDiv.innerHTML = `${currentPlayer.playerName} won!`
@@ -81,7 +83,13 @@ function checkGameStatus() {
                 winTrackerDiv.innerHTML = `${player1.playerName}: ${player1.wins}` + '\n' + `${player2.playerName}: ${player2.wins}` 
 
         }
-        
+        else if (stalemate && gameOver) {
+            currentPlayerDiv.innerHTML = ''
+
+            winAnnouncerDiv.innerHTML = `It's a tie!`
+
+
+        }
 }
 
 let player1 = new Player((prompt("What's your name, player 1?")), 'X', 0)
@@ -114,7 +122,7 @@ function newRound(turn) {
 
     turnCounter++
     console.log(turnCounter)
-    currentPlayerDiv.innerHTML = `${currentPlayer.playerName}'s turn!`
+    if (gameOver == false){currentPlayerDiv.innerHTML = `${currentPlayer.playerName}'s turn!`}
 
 }
 
@@ -127,11 +135,12 @@ function clickButton(player, button) {
     console.log(`${button.id} clicked by ${player.playerName}`)
     
     button.innerHTML = player.symbol;
+    checkGameStatus()
+
     newRound(turnCounter)
        //button.removeEventListener('click', function(){clickButton(currentPlayer,button)})
     let disabledButton = button.cloneNode(true);
     button.replaceWith(disabledButton)
-    checkGameStatus()
 }
 
 
