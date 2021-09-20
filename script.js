@@ -18,12 +18,25 @@ function newPlayer(name, symbol, wins) {
     },
     addWin: function() {
         this.wins++
+    },
+    changeSymbol: function() {
+        if (this.symbol == 'X') {
+            this.symbol = 'O'
+        }
+        else {this.symbol = 'X'}
     }
     
   }
-   
-  let player1 = newPlayer((prompt("What's your name, player 1?")), 'X', 0)
-  let player2 = newPlayer((prompt("And your name, player 2?")), 'O', 0)
+  let player1
+  let player2
+function createPlayers(){
+    player1 = newPlayer((prompt("What's your name, player 1?")), 'X', 0)
+    player2 = newPlayer((prompt("And your name, player 2?")), 'O', 0)
+
+  return {player1,player2}
+}
+
+createPlayers()
 /*
 function Player(name, symbol, wins) {
     this.playerName = name;
@@ -35,7 +48,10 @@ function Player(name, symbol, wins) {
 
 let gameOver = false
 let stalemate = false
+function updateWins(){
+    winTrackerDiv.innerHTML = `${player1.getName()}: ${player1.getWins()}` + '\n' + `${player2.getName()}: ${player2.getWins()}` 
 
+}
 function checkGameStatus() {
 
     arr = []
@@ -109,8 +125,8 @@ function checkGameStatus() {
             winAnnouncerDiv = document.getElementById("winner-announcer")
                 winAnnouncerDiv.innerHTML = `${currentPlayer.getName()} won!`
                 currentPlayerDiv.innerHTML = ''
-                winTrackerDiv.innerHTML = `${player1.getName()}: ${player1.getWins()}` + '\n' + `${player2.getName()}: ${player2.getWins()}` 
-
+               // winTrackerDiv.innerHTML = `${player1.getName()}: ${player1.getWins()}` + '\n' + `${player2.getName()}: ${player2.getWins()}` 
+                updateWins()
         }
         else if (stalemate && gameOver) {
             currentPlayerDiv.innerHTML = ''
@@ -129,8 +145,8 @@ let currentPlayer = player1
 console.log(`first plays ${player1.getName()}, who is the ${player1.getSymbol()}`)
 let currentPlayerDiv = document.getElementById('player-announcer')
 let winTrackerDiv = document.getElementById('win-tracker')
-    winTrackerDiv.innerHTML = `${player1.getName()}: ${player1.getWins()}` + '\n' + `${player2.getName()}: ${player2.getWins()}` 
-
+   // winTrackerDiv.innerHTML = `${player1.getName()}: ${player1.getWins()}` + '\n' + `${player2.getName()}: ${player2.getWins()}` 
+    updateWins()
 let buttons = document.getElementsByClassName("grid-buttons")
 
 
@@ -172,11 +188,12 @@ function clickButton(player, button) {
 }
 
 
-
+function buildGrid(){
 let i = 1
     while (i <= buttons.length)  {
         
         let button = document.getElementById(`button-${i}`)
+        button.innerHTML = ''
         button.addEventListener('mouseenter', e => {
             button.style.backgroundImage = 'linear-gradient(to right, rgb(0, 140, 150), rgb(0, 255, 155))';
             
@@ -195,9 +212,30 @@ let i = 1
         i++;
 
     }
+}
+
+buildGrid()
+
+function newGame(){
+    let clearPlayersCheckbox = document.getElementById("clear-players-checkbox")
+    if (clearPlayersCheckbox.checked){
+        createPlayers()
+        updateWins()
+    }
+    turnCounter++
+    player1.changeSymbol()
+    player2.changeSymbol()
+    gameOver = false
+    stalemate = false
+    winAnnouncerDiv.innerHTML = ''
+    buildGrid()
+    clearPlayersCheckbox.checked = false
+    newRound(turnCounter)
+}
 
 
-
+let newGameButton = document.getElementById("new-game-button")
+    newGameButton.addEventListener('click', function(){newGame()})
 
 
 
