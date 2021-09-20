@@ -20,16 +20,19 @@ body {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     /*font-family: fantasy; */
     text-align: center;
+    word-wrap: break-word;
 }
 #panel-header {
 
     font-size: 45px;
 }
 #win-tracker {
-
+    word-wrap: inherit;
     font-size: 30px;
 }
 #player-announcer{
+    word-wrap: inherit;
+
     font-size: 50px;
     color: lightcyan;
     margin-top: 19%;
