@@ -194,6 +194,8 @@ let i = 1
         
         let button = document.getElementById(`button-${i}`)
         button.innerHTML = ''
+        button.style.backgroundImage = 'linear-gradient(to right, rgb(0, 140, 255), rgb(0, 255, 255))';
+
         button.addEventListener('mouseenter', e => {
             button.style.backgroundImage = 'linear-gradient(to right, rgb(0, 140, 150), rgb(0, 255, 155))';
             
