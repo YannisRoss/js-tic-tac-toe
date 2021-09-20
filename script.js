@@ -1,9 +1,38 @@
+function newPlayer(name, symbol, wins) {
+    var player = Object.create(newPlayer.proto);
+    player.name = name;
+    player.symbol = symbol;
+    player.wins = wins;
+    return player;
+  }
+   
+    newPlayer.proto = {
+    getName: function() {
+      return this.name;
+    },
+    getSymbol: function() {
+        return this.symbol;
+    },
+    getWins: function() {
+        return this.wins
+    },
+    addWin: function() {
+        this.wins++
+    }
+    
+  }
+   
+  let player1 = newPlayer((prompt("What's your name, player 1?")), 'X', 0)
+  let player2 = newPlayer((prompt("And your name, player 2?")), 'O', 0)
+/*
 function Player(name, symbol, wins) {
     this.playerName = name;
     this.wins = wins
     this.symbol = symbol
   
 }
+*/
+
 let gameOver = false
 let stalemate = false
 
@@ -78,9 +107,9 @@ function checkGameStatus() {
             } 
             console.log('win logged')
             winAnnouncerDiv = document.getElementById("winner-announcer")
-                winAnnouncerDiv.innerHTML = `${currentPlayer.playerName} won!`
+                winAnnouncerDiv.innerHTML = `${currentPlayer.getName()} won!`
                 currentPlayerDiv.innerHTML = ''
-                winTrackerDiv.innerHTML = `${player1.playerName}: ${player1.wins}` + '\n' + `${player2.playerName}: ${player2.wins}` 
+                winTrackerDiv.innerHTML = `${player1.getName()}: ${player1.getWins()}` + '\n' + `${player2.getName()}: ${player2.getWins()}` 
 
         }
         else if (stalemate && gameOver) {
@@ -92,16 +121,15 @@ function checkGameStatus() {
         }
 }
 
-let player1 = new Player((prompt("What's your name, player 1?")), 'X', 0)
-let player2 = new Player((prompt("And your name, player 2?")), 'O', 0)
+
 
 
 let turnCounter = 0
 let currentPlayer = player1
-console.log(`first plays ${player1.playerName}, who is the ${player1.symbol}`)
+console.log(`first plays ${player1.getName()}, who is the ${player1.getSymbol()}`)
 let currentPlayerDiv = document.getElementById('player-announcer')
 let winTrackerDiv = document.getElementById('win-tracker')
-    winTrackerDiv.innerHTML = `${player1.playerName}: ${player1.wins}` + '\n' + `${player2.playerName}: ${player2.wins}` 
+    winTrackerDiv.innerHTML = `${player1.getName()}: ${player1.getWins()}` + '\n' + `${player2.getName()}: ${player2.getWins()}` 
 
 let buttons = document.getElementsByClassName("grid-buttons")
 
@@ -112,17 +140,17 @@ function newRound(turn) {
     if (turn%2 == 0) {
 
         currentPlayer = player1
-        console.log(`currentPlayer is ${currentPlayer.playerName}, should be ${player1.playerName}`)
+        console.log(`currentPlayer is ${currentPlayer.getName()}, should be ${player1.getName()}`)
     }
     else {
         currentPlayer = player2
-        console.log(`currentPlayer is ${currentPlayer.playerName}, should be ${player2.playerName}`)
+        console.log(`currentPlayer is ${currentPlayer.getName()}, should be ${player2.getName()}`)
 
     }
 
     turnCounter++
     console.log(turnCounter)
-    if (gameOver == false){currentPlayerDiv.innerHTML = `${currentPlayer.playerName}'s turn!`}
+    if (gameOver == false){currentPlayerDiv.innerHTML = `${currentPlayer.getName()}'s turn!`}
 
 }
 
@@ -132,9 +160,9 @@ newRound(turnCounter)
 
 function clickButton(player, button) {
     
-    console.log(`${button.id} clicked by ${player.playerName}`)
+    console.log(`${button.id} clicked by ${player.getName()}`)
     
-    button.innerHTML = player.symbol;
+    button.innerHTML = player.getSymbol();
     checkGameStatus()
 
     newRound(turnCounter)
